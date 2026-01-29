@@ -1,0 +1,83 @@
+:root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --accent: #d4a373;
+    --text: #e0e0e0;
+    --light-roast: #ff7eb9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0; padding: 20px;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.header { text-align: center; margin-bottom: 30px; }
+.header h1 { color: var(--accent); }
+
+.container { width: 100%; max-width: 450px; }
+
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 20px; margin-bottom: 20px;
+    border: 1px solid #333;
+}
+
+input, select {
+    width: 100%; padding: 12px; margin-top: 10px;
+    background: #222; color: white;
+    border: 1px solid #444; border-radius: 8px;
+    font-size: 1rem;
+}
+
+.timer-display {
+    font-size: 3.5rem; font-weight: bold;
+    color: var(--accent); text-align: center; margin: 15px 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Control Buttons Layout */
+#timerControls {
+    display: flex; gap: 10px; width: 100%;
+}
+
+button {
+    width: 100%; padding: 15px; border-radius: 8px; border: none;
+    font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1rem;
+}
+
+#btnMain { background: var(--accent); color: #000; }
+.btn-secondary { background: #444 !important; color: white !important; }
+.btn-danger { background: #ff4d4d !important; color: white !important; }
+
+/* Tabs & Recipe Details */
+.tab-container { display: flex; gap: 10px; margin: 15px 0; }
+.tab-btn {
+    background: #333; color: white; padding: 10px; flex: 1;
+    border: 1px solid #444; border-radius: 6px; cursor: pointer;
+}
+.tab-btn.active { background: var(--accent); color: black; }
+
+.temp-info {
+    color: var(--accent);
+    font-weight: bold;
+    margin: 5px 0 15px 0;
+    font-size: 0.9rem;
+}
+
+.recipe-card { border-left: 5px solid var(--light-roast); }
+.recipe-content { display: none; padding: 10px 0; border-top: 1px solid #333; }
+.recipe-content.active { display: block; }
+.tag { background: var(--light-roast); color: black; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+.step { margin: 12px 0; font-size: 0.95rem; line-height: 1.5; }
+.time-mark { color: var(--accent); font-weight: bold; margin-right: 10px; }
+
+.footer-link {
+    display: inline-block; margin-top: 20px; text-decoration: none; color: var(--accent);
+    font-size: 0.9rem; opacity: 0.7;
+}

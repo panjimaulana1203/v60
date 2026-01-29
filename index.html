@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panji Coffee Guide - Professional Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Manual Brew Guide</h1>
+        <p>Seduh Light Roast favoritmu di panji.site</p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <label for="coffeeInput">Gram Kopi:</label>
+            <input type="number" id="coffeeInput" value="15" oninput="updateBrew()">
+            <p style="margin-top: 15px;">Air yang dibutuhkan (1:15): <br>
+               <strong style="font-size: 1.4rem; color: var(--accent);"><span id="waterReq">225</span> ml</strong>
+            </p>
+            
+            <div class="timer-display" id="timer">00:00</div>
+            
+            <div id="timerControls">
+                <button id="btnMain" onclick="startTimer()">START BREW</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <label for="beanSelect">Pilih Biji Kopi:</label>
+            <select id="beanSelect" onchange="showBean()">
+                <option value="fugol_indo">Fugol Indonesia</option>
+                <option value="fugol_inter">Fugol International</option>
+                <option value="ethiopia">Ethiopia / Ciwidey</option>
+                <option value="kenya">Kenya / West Java</option>
+                <option value="colombia">Colombia Pink Bourbon</option>
+            </select>
+        </div>
+
+        <div id="recipeArea">
+            <div id="fugol_indo" class="card recipe-card" style="border-left-color: #ff9f43;">
+                <span class="tag" style="background: #ff9f43; color: #000;">LIGHT-MEDIUM</span>
+                <h3>Fugol Indonesia</h3>
+                <p class="temp-info">Suhu Air: 91°C (Extra Sweetness)</p>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="showPour('fugol_indo', '3pour', this)">3 Tuang</button>
+                    <button class="tab-btn" onclick="showPour('fugol_indo', '4pour', this)">4 Tuang</button>
+                </div>
+                <div id="fugol_indo-3pour" class="recipe-content active">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 45ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:30 - 01:15</span> Tuang hingga 135ml</div>
+                    <div class="step"><span class="time-mark">01:15 - 02:15</span> Tuang hingga 225ml</div>
+                </div>
+                <div id="fugol_indo-4pour" class="recipe-content">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 45ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:30 - 01:00</span> +45ml (90ml)</div>
+                    <div class="step"><span class="time-mark">01:00 - 01:45</span> +65ml (155ml)</div>
+                    <div class="step"><span class="time-mark">01:45 - 02:30</span> +70ml (225ml)</div>
+                </div>
+            </div>
+
+            <div id="fugol_inter" class="card recipe-card" style="display:none; border-left-color: #00ffcc;">
+                <span class="tag" style="background: #00ffcc; color: #000;">LIGHT ROAST</span>
+                <h3>Fugol International</h3>
+                <p class="temp-info">Suhu Air: 93°C (High Clarity)</p>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="showPour('fugol_inter', '3pour', this)">3 Tuang</button>
+                    <button class="tab-btn" onclick="showPour('fugol_inter', '4pour', this)">4 Tuang</button>
+                </div>
+                <div id="fugol_inter-3pour" class="recipe-content active">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 45ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:30 - 01:15</span> Tuang hingga 130ml</div>
+                    <div class="step"><span class="time-mark">01:15 - 02:15</span> Tuang hingga 225ml</div>
+                </div>
+                <div id="fugol_inter-4pour" class="recipe-content">
+                    <div class="step"><span class="time-mark">00:00 - 00:40</span> 50ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:40 - 01:15</span> +50ml (100ml)</div>
+                    <div class="step"><span class="time-mark">01:15 - 01:50</span> +60ml (160ml)</div>
+                    <div class="step"><span class="time-mark">01:50 - 02:30</span> +65ml (225ml)</div>
+                </div>
+            </div>
+
+            <div id="ethiopia" class="card recipe-card" style="display:none;">
+                <span class="tag">LIGHT ROAST</span>
+                <h3>Ethiopia / Ciwidey</h3>
+                <p class="temp-info">Suhu Air: 93°C</p>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="showPour('ethiopia', '3pour', this)">2 Pouring</button>
+                    <button class="tab-btn" onclick="showPour('ethiopia', '4pour', this)">3 Pouring</button>
+                </div>
+                <div id="ethiopia-3pour" class="recipe-content active">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 45ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:30 - 01:15</span> Tuang ke 130ml</div>
+                    <div class="step"><span class="time-mark">01:15 - 02:15</span> Tuang ke 225ml</div>
+                </div>
+                <div id="ethiopia-4pour" class="recipe-content">
+                    <div class="step"><span class="time-mark">00:00 - 00:45</span> 45ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:45 - 01:20</span> +45ml (90ml)</div>
+                    <div class="step"><span class="time-mark">01:20 - 02:00</span> +60ml (150ml)</div>
+                    <div class="step"><span class="time-mark">02:00 - 02:45</span> +75ml (225ml)</div>
+                </div>
+            </div>
+
+            <div id="kenya" class="card recipe-card" style="display:none; border-left-color: #ff9a23;">
+                <span class="tag" style="background:#ff9a23">LIGHT ROAST</span>
+                <h3>Kenya / West Java</h3>
+                <p class="temp-info">Suhu Air: 92°C</p>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="showPour('kenya', '3pour', this)">2 Pouring</button>
+                    <button class="tab-btn" onclick="showPour('kenya', '4pour', this)">3 Pouring</button>
+                </div>
+                <div id="kenya-3pour" class="recipe-content active">
+                    <div class="step"><span class="time-mark">00:00 - 00:45</span> 40ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:45 - 01:30</span> Tuang ke 120ml</div>
+                    <div class="step"><span class="time-mark">01:30 - 02:30</span> Tuang ke 225ml</div>
+                </div>
+                <div id="kenya-4pour" class="recipe-content">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 55ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:45 - 01:15</span> 55ml (110ml)</div>
+                    <div class="step"><span class="time-mark">01:30 - 02:00</span> 60ml (170ml)</div>
+                    <div class="step"><span class="time-mark">02:15 - 02:45</span> 55ml (225ml)</div>
+                </div>
+            </div>
+
+            <div id="colombia" class="card recipe-card" style="display:none; border-left-color: #a2d2ff;">
+                <span class="tag" style="background:#a2d2ff">LIGHT ROAST</span>
+                <h3>Colombia Pink Bourbon</h3>
+                <p class="temp-info">Suhu Air: 94°C</p>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="showPour('colombia', '3pour', this)">2 Pouring</button>
+                    <button class="tab-btn" onclick="showPour('colombia', '4pour', this)">3 Pouring</button>
+                </div>
+                <div id="colombia-3pour" class="recipe-content active">
+                    <div class="step"><span class="time-mark">00:00 - 00:30</span> 50ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">00:30 - 01:15</span> Tuang ke 150ml</div>
+                    <div class="step"><span class="time-mark">01:15 - 02:15</span> Tuang ke 250ml</div>
+                </div>
+                <div id="colombia-4pour" class="recipe-content">
+                    <div class="step"><span class="time-mark">00:00 - 00:45</span> 50ml (Bloom)</div>
+                    <div class="step"><span class="time-mark">01:00 - 01:30</span> 50ml (100ml)</div>
+                    <div class="step"><span class="time-mark">01:45 - 02:15</span> 75ml (175ml)</div>
+                    <div class="step"><span class="time-mark">02:30 - 03:00</span> 75ml (250ml)</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="https://panjimaulana.site" class="footer-link">← Kembali ke panji.site</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
