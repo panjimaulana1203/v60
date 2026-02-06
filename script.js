@@ -1,7 +1,18 @@
-// 1. Brew Calculator
+// 1. Brew Calculator (Updated for Dynamic Recipe Values)
 function updateBrew() {
     const coffee = document.getElementById('coffeeInput').value;
-    document.getElementById('waterReq').innerText = coffee ? (coffee * 15) : 0;
+    const totalWater = coffee ? (coffee * 15) : 0;
+    
+    // Update main water requirement display
+    document.getElementById('waterReq').innerText = totalWater;
+
+    // Update all dynamic steps in the recipe area
+    const waterElements = document.querySelectorAll('.water-value');
+    waterElements.forEach(el => {
+        const ratio = parseFloat(el.getAttribute('data-ratio'));
+        const newValue = Math.round(totalWater * ratio);
+        el.innerText = newValue;
+    });
 }
 
 // 2. Bean Display Logic
@@ -75,3 +86,6 @@ function renderControls() {
         `;
     }
 }
+
+// Run initial update on load
+window.onload = updateBrew;
